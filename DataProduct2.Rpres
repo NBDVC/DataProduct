@@ -1,0 +1,40 @@
+DataProduct2
+========================================================
+author:CU2RealMadrid 
+date: Nov 13, 2014
+
+Application Theme
+========================================================
+
+The application utilizes machine learning principles to 
+guide users to vehicle preferences.  
+
+- mtcars data was analyzed via random forest
+- UI candy was limited to 4 slider inpute to reduce ui.r coding
+- Random Forest object was cached to save server load
+
+MTCar's Features
+========================================================
+
+```{r}
+head(mtcars)
+```
+
+Importance of Variables 
+========================================================
+
+```{r, echo=FALSE}
+library(caret)
+load("C:/Users/Greg/Desktop/DataProduct/DataProduct1/ML.RData")
+plot(varImp(RF))
+```
+
+Having not set the random seed the importance of variables shifted from initial setup.  Could be addressed in Re-engineering effort.
+
+Exponential Growth
+========================================================
+- since the deployment of this app, traffic to CU2RealMadrid has exploded
+- Additional UI candy in the form of more sliders seen as true upgrade potential
+- More feature control will increase user traffic
+- Re-engineering requirements projected at 100 hours ~$15,000
+- We are really excited about this project and eager to get started

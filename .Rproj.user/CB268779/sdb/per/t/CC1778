@@ -1,0 +1,16 @@
+{
+    "contents" : "library(shiny)\nlibrary(caret)\nlibrary(randomForest)\ndata(mtcars)\nmtcars$ID<-1:32\nqus<-\"\"\nload(\"ML.RData\")\n#RF<-train(ID~., meth=\"rf\", data=mtcars, importance = TRUE)\ntesting<-apply(mtcars, 2, FUN=median)\nCnames<-names(testing)\ntesting<-matrix(testing, nrow=1, ncol=12)\ntesting<-data.frame(testing)\ncolnames(testing)<-Cnames\n\n# Define server logic required to draw a histogram\nshinyServer(function(input, output) {\n  x    <- mtcars[,\"cyl\"]  # Old Faithful Geyser data\n  bins1 <- seq(4, 8, length.out =6)\n  y    <- mtcars[,\"mpg\"]  # Old Faithful Geyser data\n  bins2 <- seq(8, 36, length.out =10)\n  z    <- mtcars[,\"gear\"]  # Old Faithful Geyser data\n  bins3 <- seq(2, 6, length.out =6)\n  w    <- mtcars[,\"drat\"]  # Old Faithful Geyser data\n  bins4 <- seq(2, 6, length.out =10)\n  \n  # Expression that generates a histogram. The expression is\n  # wrapped in a call to renderPlot to indicate that:\n  #\n  #  1) It is \"reactive\" and therefore should re-execute automatically\n  #     when inputs change\n  #  2) Its output type is a plot\n  \n  output$distPlot <- renderPlot({\n\n    \n    # draw the histogram with the specified input abline\n    par(mfrow=c(2,2))\n    hist(x, breaks = bins1, col = 'darkgray', border = 'white', main=\"cylinders\")\n    abline(v=input$cyl, col=555, lwd=3)\n    hist(y, breaks = bins2, col = 'darkgray', border = 'white', main=\"miles per gallon\")\n    abline(v=input$mpg, col=555, lwd=3)\n    hist(z, breaks = bins3, col = 'darkgray', border = 'white', main=\"gears\")\n    abline(v=input$gear, col=555, lwd=3)\n    hist(w, breaks = bins4, col = 'darkgray', border = 'white', main=\"gear ratio\")\n    abline(v=input$drat, col=555, lwd=3)\n  })\n\n\n  output$Recom <- renderText({\n    testing[,2]=input$cyl\n    testing[,1]=input$mpg\n    testing[,10]=input$gear\n    testing[,5]=input$drat\n    \n    paste(\"We think you would like \", \n    rownames(mtcars[predict(RF, newdata=testing),]))\n    })\n})\n",
+    "created" : 1415916908721.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2133533795",
+    "id" : "CC1778",
+    "lastKnownWriteTime" : 1415921121,
+    "path" : "C:/Users/Greg/Desktop/DataProduct/DataProduct1/server.R",
+    "project_path" : "DataProduct1/server.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

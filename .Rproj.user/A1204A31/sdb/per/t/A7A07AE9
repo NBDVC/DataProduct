@@ -1,0 +1,17 @@
+{
+    "contents" : "library(shiny)\n\n# Define server logic required to draw a histogram\nshinyServer(function(input, output) {\n  \n  # Expression that generates a histogram. The expression is\n  # wrapped in a call to renderPlot to indicate that:\n  #\n  #  1) It is \"reactive\" and therefore should re-execute automatically\n  #     when inputs change\n  #  2) Its output type is a plot\n  \n  output$distPlot <- renderPlot({\n    x    <- faithful[, 2]  # Old Faithful Geyser data\n    bins <- seq(min(x), max(x), length.out = input$cyl + 1)\n    \n    # draw the histogram with the specified number of bins\n    hist(x, breaks = bins, col = 'darkgray', border = 'white')\n  })\n})\n",
+    "created" : 1415754467284.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2074226518",
+    "id" : "A7A07AE9",
+    "lastKnownWriteTime" : 1415755319,
+    "path" : "C:/Users/Greg/Desktop/DataProduct/DataProduct1/server.R",
+    "project_path" : "DataProduct1/server.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
